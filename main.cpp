@@ -1,6 +1,9 @@
-#include <windows.h>
+#include<Windows.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#include<gl\freeglut.h>
+#include <math.h>
+
 
 void init(void);
 void tampil(void);
@@ -31,6 +34,11 @@ float xdiff = 0.0f;
 float ydiff = 0.0f;
 bool mouseDown = false;
 int is_depth;
+int gerak = 0;
+bool atas = true;
+//deklarasi pembuatan lingkaran AWAN
+const double PI = 3.142857143;
+int i,radius,jumlah_titik,x_tengah,y_tengah;
 
 
 void initRendering() {
@@ -549,6 +557,92 @@ void palingdepan(void)
 
 }
 
+void lampu(void)
+{
+    glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(207, 196, 167);
+    glVertex3f(27,13,90);
+    glVertex3f(28,13,90);
+    glVertex3f(28,-50,90);
+    glVertex3f(27,-50,90);
+    glEnd();
+
+     glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(222, 184, 135);
+    glVertex3f(27,13,90);
+    glVertex3f(27,13,89);
+    glVertex3f(27,-50,89);
+    glVertex3f(27,-50,90);
+    glEnd();
+
+    glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(222, 184, 135);
+    glVertex3f(28,13,90);
+    glVertex3f(28,13,89);
+    glVertex3f(28,-50,89);
+    glVertex3f(28,-50,90);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glColor3ub(207, 196, 167);
+    glVertex3f(27,13,89);
+    glVertex3f(28,13,89);
+    glVertex3f(28,-50,89);
+    glVertex3f(27,-50,89);
+    glEnd();
+
+
+    //
+    glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex3f(26,15,90);
+    glVertex3f(29,15,90);
+    glVertex3f(29,13,90);
+    glVertex3f(26,13,90);
+    glEnd();
+
+     glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex3f(26,15,90);
+    glVertex3f(26,15,89);
+    glVertex3f(26,13,89);
+    glVertex3f(26,13,90);
+    glEnd();
+
+    glPushMatrix();
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex3f(29,15,90);
+    glVertex3f(29,15,89);
+    glVertex3f(29,13,89);
+    glVertex3f(29,13,90);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex3f(26,15,89);
+    glVertex3f(29,15,89);
+    glVertex3f(29,13,89);
+    glVertex3f(26,13,89);
+    glEnd();
+
+}
+
+void lampu2()
+{
+
+    glTranslatef(-28,0,0);
+    lampu();
+    glTranslatef(-28,0,0);
+    lampu();
+
+
+}
 void tanah(void)
 {
     glPushMatrix();
@@ -4106,6 +4200,209 @@ void decodalam (void)
 }
 
 
+void awan(void)
+{
+    glPushMatrix();
+    glTranslatef( gerak, 0,0);
+
+    //-------------------------------------- AWAN
+	glColor3f(1,1,1);
+       glBegin(GL_POLYGON);
+
+       radius = 500;
+       jumlah_titik = 200;
+       x_tengah = 50;
+       y_tengah = 10400;
+
+       for (i=0;i<=360;i++)
+       {
+              float sudut=i*(2*PI/jumlah_titik);
+              float x=x_tengah+radius*cos (sudut);
+              float y=y_tengah+radius*sin (sudut);
+              glVertex2f(x/100,y/100);
+       }
+    glEnd();
+
+       glColor3f(1,1,1);
+       glBegin(GL_POLYGON);
+
+       radius = 700;
+       jumlah_titik = 60;
+       x_tengah = 0;
+       y_tengah = 10000;
+
+       for (i=0;i<=360;i++)
+       {
+              float sudut=i*(2*PI/jumlah_titik);
+              float x=x_tengah+radius*cos (sudut);
+              float y=y_tengah+radius*sin (sudut);
+              glVertex2f(x/100,y/100);
+       }
+        glEnd();
+
+        glColor3f(1,1,1);
+       glBegin(GL_POLYGON);
+
+       radius = 500;
+       jumlah_titik = 60;
+       x_tengah = -1000;
+       y_tengah = 9800;
+
+       for (i=0;i<=360;i++)
+       {
+              float sudut=i*(2*PI/jumlah_titik);
+              float x=x_tengah+radius*cos (sudut);
+              float y=y_tengah+radius*sin (sudut);
+              glVertex2f(x/100,y/100);
+       }
+        glEnd();
+
+        glColor3f(1,1,1);
+       glBegin(GL_POLYGON);
+
+       radius = 300;
+       jumlah_titik = 60;
+       x_tengah = -700;
+       y_tengah = 9500;
+
+       for (i=0;i<=360;i++)
+       {
+              float sudut=i*(2*PI/jumlah_titik);
+              float x=x_tengah+radius*cos (sudut);
+              float y=y_tengah+radius*sin (sudut);
+              glVertex2f(x/100,y/100);
+       }
+        glEnd();
+
+       glColor3f(1,1,1);
+       glBegin(GL_POLYGON);
+       radius = 400;
+       jumlah_titik = 60;
+       x_tengah =-500;
+       y_tengah = 10000;
+
+       for (i=0;i<=360;i++)
+       {
+              float sudut=i*(2*PI/jumlah_titik);
+              float x=x_tengah+radius*cos (sudut);
+              float y=y_tengah+radius*sin (sudut);
+              glVertex2f(x/100,y/100);
+       }
+        glEnd();
+
+        //
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 500;
+        jumlah_titik = 200;
+        x_tengah = 100;
+        y_tengah = 14000;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        //sss
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 700;
+        jumlah_titik = 200;
+        x_tengah = 800;
+        y_tengah = 14000;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        //
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 500;
+        jumlah_titik = 200;
+        x_tengah = 1450;
+        y_tengah = 13500;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        ////
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 250;
+        jumlah_titik = 200;
+        x_tengah = 1900;
+        y_tengah = 13500;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        ////
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 250;
+        jumlah_titik = 200;
+        x_tengah = -1000;
+        y_tengah = 13000;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 250;
+        jumlah_titik = 200;
+        x_tengah = -400;
+        y_tengah = 12500;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+
+        //
+        glColor3f(1,1,1);
+        glBegin(GL_POLYGON);
+        radius = 600;
+        jumlah_titik = 200;
+        x_tengah = -1600;
+        y_tengah = 13000;
+        for (i=0;i<=360;i++)
+        {
+                float sudut=i*(2*PI/jumlah_titik);
+                float x=x_tengah+radius*cos (sudut);
+                float y=y_tengah+radius*sin (sudut);
+                glVertex2f(x/100,y/100);
+        }
+        glEnd();
+}
+
+
 void tampil(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -4126,7 +4423,10 @@ void tampil(void)
     jendeladec2();
     palingdepan();
     jendeladeckanan();
+    lampu();
     jendeladeckiri();
+    lampu2();
+    awan();
     glPushMatrix();
     glPopMatrix();
     glutSwapBuffers();
@@ -4138,9 +4438,28 @@ void hilang(void)
     lantai();
     tanah();
     decodalam();
+    lampu();
+    lampu2();
     glPushMatrix();
     glPopMatrix();
     glutSwapBuffers();
+}
+
+
+void timer(int t)//TWEENING
+{
+    if (atas){
+        gerak += 1;
+    } else {
+        gerak -= 1;
+    }
+    if (gerak > 100) {
+        atas = false;
+    } else if(gerak < -10){
+        atas = true;
+    }
+ glutPostRedisplay();
+  glutTimerFunc(50,timer,0);
 }
 
 void display(void)
@@ -4277,6 +4596,7 @@ int main(int argc, char **argv){
     glutMouseFunc(mouse);
     glutMotionFunc(mouseMotion);
     glutReshapeFunc(ukuran);
+    glutTimerFunc(1,timer,0);
     glutMainLoop();
 
     return 0;
